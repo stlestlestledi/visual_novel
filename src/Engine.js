@@ -5,7 +5,9 @@ const character = document.querySelector('#character');
 const background = document.querySelector('#bg');
 const choiceBox = document.querySelector('#choice-box');
 
-const click = () => new Promise(res => window.addEventListener('click', res));
+const click = () => new Promise(res => {
+    window.addEventListener('click', res);
+});
 const delay = ms => new Promise(res => setTimeout(res, ms));
 
 let first = 0; let curr = 0;
@@ -70,23 +72,42 @@ const createChoice = prompt => {
 const path = (prompt, action) => ({element: createChoice(prompt), action: action});
 
 const choice = (...options) => {
-    if (curr < first-1) return;
-    return new Promise(res => options.forEach(option => option.element.onclick = async () => {
+    return new Promise(res => options.forEach(option => option.element.onclick = async ev => {
+        ev.stopPropagation();
         [...choiceBox.children].forEach(child => child.remove());
         await option.action();
         res();
     }));
 }
 
+/**
+ * 
+ * @param {string} what 
+ * @param {HTMLAudioElement} voice 
+ * @returns 
+ */
 const say = async (what, voice) => {
     if (curr++ < first-1) return;
-    save();
+    // save();
     border.style.opacity = 1;
-    
     dialogue.textContent = ''; 
 
+    if (voice == undefined) voice = new Audio('sounds/nothing.mp3');
+
+    const voiceEvent = voice.addEventListener('timeupdate', async function() {
+        let buffer = .24
+        if (this.currentTime > this.duration - buffer) {
+            this.currentTime = 0;
+            this.play();
+        }
+    });
+
     for (const part of what.split('/b')) {
+        voice.play();
         await write(part, dialogue);
-        if (part !== '') await click();
+        voice.pause();
+        await click();
     }
+
+    removeEventListener('timeupdate', voiceEvent);
 }
