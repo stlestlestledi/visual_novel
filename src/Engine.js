@@ -56,9 +56,7 @@ const scene = src => {
         background.style.display = 'none';
         return;
     }
-
-    background.style.display = 'block';
-    background.src = `artwork/background/${src}`;
+    document.body.style.backgroundImage = `url(artwork/background/${src})`;
 }
 
 const createChoice = prompt => {
@@ -108,6 +106,5 @@ const say = async (what, voice) => {
         voice.pause();
         await click();
     }
-
     removeEventListener('timeupdate', voiceEvent);
 }

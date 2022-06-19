@@ -4,6 +4,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Document</title>
+        <link rel="icon" href="./artwork/icon/icon.png" />
         <style>
             * {
                 padding: 0; margin: 0;
@@ -15,14 +16,15 @@
                 flex-direction: column-reverse;
                 overflow: hidden;
                 font-family: 'Comic Sans MS';
+                background-position: center;
             }
             #dialogue-box {
-                width: 50vw; height: 20vh;
+                width: 50%; height: 20vh;
                 min-height: 250px;
                 z-index: 3;
                 margin: 20px;
-                min-width: 600px;
                 opacity: 0;
+                min-width: 600px;
             }
             .borda {
                 background-color: white;
@@ -39,12 +41,12 @@
                 max-width: 100%;
                 display: none;
             }
-            #bg {
+            /* #bg {
                 min-width: 100vw; min-height: 100vh;
                 position: absolute;
                 z-index: -2;
                 display: none;
-            }
+            } */
             #dialogue {
                 padding: 20px;
                 font-size: 30px;
@@ -74,11 +76,17 @@
                     width: 100%;
                     overflow-y: scroll; 
                     height: 250px;
+                    min-width: none;
                 }
                 #character {
                     align-self: center;
                     width: 250px;
                     height: auto;
+                }
+                #dialogue-box {
+                    position: relative;
+                    width: 100vw;
+                    right: 20px;
                 }
 
             }
@@ -100,7 +108,7 @@
         </style>
     </head>
     <body>
-        <img src="bg.png" id="bg"/>
+        <!-- <img src="bg.png" id="bg"/> -->
         <div id="dialogue-box" class="borda">
             <div id="dialogue"></div>
         </div>

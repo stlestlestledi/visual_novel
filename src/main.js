@@ -6,6 +6,7 @@ angryVoice.volume = .5
 
 async function storyboard() {    
     await click();
+    scene('bg.png');
     show('pessoa mola feliz.png');
     await say('vai se fuder', angryVoice);
     await say('pau pau pau', neutralVoice);
@@ -20,6 +21,5 @@ async function storyboard() {
             await say('!!!', angryVoice);
         }),
     );
-
     await say('sexo', angryVoice);
 }
