@@ -29,6 +29,7 @@
                 border: 20px solid black;
                 border-image: url('artwork/border/borda.png') 30% repeat;
             }
+
             #character {
                 position: relative;
                 top: 100px;
@@ -64,8 +65,19 @@
                 flex-direction: column;
                 gap: 10%;
             }
+            @media only screen and (max-width: 600px) {
+                #choice-box {
+                    padding: 10px;
+                    top: 0; left: 0;
+                    transform: translate(0, 0);
+                    width: 100%;
+                    overflow-y: scroll; 
+                    height: 250px;
+                }
+            }
             .choice {
                 width: 100%; height: 25%;
+                min-height: 50px;
                 font-size: 20px;
                 display: flex;
                 align-items: center;
